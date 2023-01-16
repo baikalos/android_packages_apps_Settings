@@ -49,6 +49,7 @@ import com.android.settings.system.SystemDashboardFragment;
 import com.android.settingslib.drawer.CategoryKey;
 
 import com.crdroid.settings.crDroidSettingsLayout;
+import com.crdroid.settings.BaikalSettingsLayout;
 
 import java.util.Map;
 
@@ -128,6 +129,8 @@ public class DashboardFragmentRegistry {
         PARENT_TO_CATEGORY_KEY_MAP.put(SmartBatterySettings.class.getName(),
                 CategoryKey.CATEGORY_SMART_BATTERY_SETTINGS);
         PARENT_TO_CATEGORY_KEY_MAP.put(crDroidSettingsLayout.class.getName(),
+                CategoryKey.CATEGORY_CRDROID);
+        PARENT_TO_CATEGORY_KEY_MAP.put(BaikalSettingsLayout.class.getName(),
                 CategoryKey.CATEGORY_CRDROID);
 
         CATEGORY_KEY_TO_PARENT_MAP = new ArrayMap<>(PARENT_TO_CATEGORY_KEY_MAP.size());

@@ -152,6 +152,7 @@ public abstract class SettingsPreferenceFragment extends InstrumentedPreferenceF
         final View root = super.onCreateView(inflater, container, savedInstanceState);
         mPinnedHeaderFrameLayout = root.findViewById(R.id.pinned_header);
         mAppBarLayout = getActivity().findViewById(R.id.app_bar);
+        Log.d(TAG, "mPinnedHeaderFrameLayout " + mPinnedHeaderFrameLayout);
         return root;
     }
 
@@ -180,12 +181,14 @@ public abstract class SettingsPreferenceFragment extends InstrumentedPreferenceF
         final View pinnedHeader =
                 inflater.inflate(layoutResId, mPinnedHeaderFrameLayout, false);
         setPinnedHeaderView(pinnedHeader);
+        Log.d(TAG, "setPinnedHeaderView(int layoutResId)", new Throwable());
         return pinnedHeader;
     }
 
     public void setPinnedHeaderView(View pinnedHeader) {
         mPinnedHeaderFrameLayout.addView(pinnedHeader);
         mPinnedHeaderFrameLayout.setVisibility(View.VISIBLE);
+        Log.d(TAG, "setPinnedHeaderView(View pinnedHeader)", new Throwable());
     }
 
     public void showPinnedHeader(boolean show) {
@@ -318,6 +321,7 @@ public abstract class SettingsPreferenceFragment extends InstrumentedPreferenceF
         if (getPreferenceScreen() != null) {
             getPreferenceScreen().addPreference(preference);
         }
+        Log.d(TAG, "addPreferenceToTop", new Throwable());
     }
 
     @Override
@@ -330,6 +334,7 @@ public abstract class SettingsPreferenceFragment extends InstrumentedPreferenceF
         if (preferenceScreen != null) {
             if (mHeader != null) {
                 preferenceScreen.addPreference(mHeader);
+                Log.d(TAG, "setPreferenceScreen", new Throwable());
             }
         }
     }
