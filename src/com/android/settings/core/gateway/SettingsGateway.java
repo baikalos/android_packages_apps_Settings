@@ -181,6 +181,7 @@ import com.android.settings.wifi.savedaccesspoints2.SavedAccessPointsWifiSetting
 import com.android.settings.wifi.tether.WifiTetherSettings;
 
 import com.crdroid.settings.crDroidSettingsLayout;
+import com.crdroid.settings.BaikalSettingsLayout;
 import com.crdroid.settings.fragments.ui.SmartPixels;
 
 import con.android.settings.wifi.tether.WifiTetherClientManager;
@@ -353,6 +354,7 @@ public class SettingsGateway {
             TurnScreenOnSettings.class.getName(),
             TurnScreenOnDetails.class.getName(),
             crDroidSettingsLayout.class.getName(),
+            BaikalSettingsLayout.class.getName(),
             RunningServices.class.getName(),
             SmartPixels.class.getName(),
             WifiTetherClientManager.class.getName()
@@ -399,6 +401,7 @@ public class SettingsGateway {
             Settings.ModuleLicensesActivity.class.getName(),
             UserBackupSettingsActivity.class.getName(),
             Settings.crDroidSettingsLayoutActivity.class.getName(),
+            Settings.BaikalSettingsLayoutActivity.class.getName(),
             Settings.DevRunningServicesActivity.class.getName(),
             Settings.SmartPixelsActivity.class.getName(),
     };
