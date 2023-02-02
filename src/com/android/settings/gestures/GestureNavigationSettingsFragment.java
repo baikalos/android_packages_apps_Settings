@@ -55,6 +55,7 @@ public class GestureNavigationSettingsFragment extends DashboardFragment {
     private static final String NAVIGATION_BAR_LENGTH_KEY = "gesture_navbar_length_preference";
     private static final String GESTURE_NAVBAR_LENGTH_KEY = "gesture_navbar_length_preference";
     private static final String GESTURE_BACK_HEIGHT_KEY = "gesture_back_height";
+    private static final String GESTURE_NAVBAR_RADIUS_KEY = "gesture_navbar_radius_preference";
 
     private WindowManager mWindowManager;
     private BackGestureIndicatorView mIndicatorView;
@@ -97,6 +98,7 @@ public class GestureNavigationSettingsFragment extends DashboardFragment {
         initSeekBarPreference(GESTURE_BACK_HEIGHT_KEY);
 
         initGestureNavbarLengthPreference();
+        initGestureBarRadiusPreference();
 
         boolean isTaskbarEnabled = LineageSettings.System.getInt(getContext().getContentResolver(),
                 LineageSettings.System.ENABLE_TASKBAR, isTablet(getContext()) ? 1 : 0) == 1;
@@ -150,7 +152,6 @@ public class GestureNavigationSettingsFragment extends DashboardFragment {
         pref.setHapticFeedbackMode(SeekBarPreference.HAPTIC_FEEDBACK_MODE_ON_TICKS);
 
         String settingsKey;
-        float initScale = 0;
 
         switch(key) {
             case LEFT_EDGE_SEEKBAR_KEY:
@@ -167,6 +168,8 @@ public class GestureNavigationSettingsFragment extends DashboardFragment {
                 break;
         }
 
+        float[] scales = mBackGestureInsetScales;
+        float initScale = 0;
         if (settingsKey != "") {
             initScale = Settings.Secure.getFloat(
                   getContext().getContentResolver(), settingsKey, 1.0f);
@@ -181,7 +184,7 @@ public class GestureNavigationSettingsFragment extends DashboardFragment {
         mCurrentLefttWidth = (int) (mDefaultBackGestureInset * currentWidthScale);
 
         if (key == GESTURE_BACK_HEIGHT_KEY) {
-            mBackGestureInsetScales = mBackGestureHeightScales;
+            scales = mBackGestureHeightScales;
             initScale = Settings.System.getInt(
                     getContext().getContentResolver(), settingsKey, 0);
         }
@@ -189,8 +192,8 @@ public class GestureNavigationSettingsFragment extends DashboardFragment {
         // Find the closest value to initScale
         float minDistance = Float.MAX_VALUE;
         int minDistanceIndex = -1;
-        for (int i = 0; i < mBackGestureInsetScales.length; i++) {
-            float d = Math.abs(mBackGestureInsetScales[i] - initScale);
+        for (int i = 0; i < scales.length; i++) {
+            float d = Math.abs(scales[i] - initScale);
             if (d < minDistance) {
                 minDistance = d;
                 minDistanceIndex = i;
@@ -208,7 +211,7 @@ public class GestureNavigationSettingsFragment extends DashboardFragment {
                     mCurrentRightWidth = width;
                 }
             } else {
-                final int heightScale = (int) (mBackGestureInsetScales[(int) v]);
+                final int heightScale = (int) (mBackGestureHeightScales[(int) v]);
                 mIndicatorView.setIndicatorHeightScale(heightScale);
                 // dont use updateViewLayout else it will animate
                 mWindowManager.removeView(mIndicatorView);
@@ -222,14 +225,13 @@ public class GestureNavigationSettingsFragment extends DashboardFragment {
         });
 
         pref.setOnPreferenceChangeStopListener((p, v) -> {
-            final float scale = mBackGestureInsetScales[(int) v];
             if (key == GESTURE_BACK_HEIGHT_KEY) {
                 mIndicatorView.setIndicatorWidth(0, false);
                 mIndicatorView.setIndicatorWidth(0, true);
-                Settings.System.putInt(getContext().getContentResolver(), settingsKey, (int) scale);
+                Settings.System.putInt(getContext().getContentResolver(), settingsKey, (int) mBackGestureHeightScales[(int) v]);
             } else {
                 mIndicatorView.setIndicatorWidth(0, key == LEFT_EDGE_SEEKBAR_KEY);
-                Settings.Secure.putFloat(getContext().getContentResolver(), settingsKey, scale);
+                Settings.Secure.putFloat(getContext().getContentResolver(), settingsKey, mBackGestureInsetScales[(int) v]);
             }
             return true;
         });
@@ -245,6 +247,17 @@ public class GestureNavigationSettingsFragment extends DashboardFragment {
         mGestureNavbarLengthPreference.setOnPreferenceChangeListener((p, v) ->
             Settings.System.putIntForUser(resolver, Settings.System.GESTURE_NAVBAR_LENGTH_MODE,
                 (Integer) v, UserHandle.USER_CURRENT));
+    }
+
+    private void initGestureBarRadiusPreference() {
+        final LabeledSeekBarPreference pref = getPreferenceScreen().
+            findPreference(GESTURE_NAVBAR_RADIUS_KEY);
+        pref.setContinuousUpdates(true);
+        pref.setProgress(Settings.System.getIntForUser(getContext().getContentResolver(),
+            Settings.System.GESTURE_NAVBAR_RADIUS, 3, UserHandle.USER_CURRENT));
+        pref.setOnPreferenceChangeListener((p, v) ->
+            Settings.System.putIntForUser(getContext().getContentResolver(),
+                Settings.System.GESTURE_NAVBAR_RADIUS, (Integer) v, UserHandle.USER_CURRENT));
     }
 
     private static float[] getFloatArray(TypedArray array) {
