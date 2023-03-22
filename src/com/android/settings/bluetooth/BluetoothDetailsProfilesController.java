@@ -182,6 +182,15 @@ public class BluetoothDetailsProfilesController extends BluetoothDetailsControll
                     "SBC_BR_" + HIGH_QUALITY_AUDIO_PREF_TAG);
 
             int bitrate = a2dp.getHighQualitySbcBitrate(device);
+            boolean hdEnabled = a2dp.isHighQualityAudioEnabled(device);
+
+            if( bitrate != 0 && hdEnabled ) {
+                Log.e(TAG, "Both SBC HD and HD Audio enabled!!!! Something terribly wrong. Disable Both ;-) " + device);
+                a2dp.setHighQualitySbcEnabled(device,0);
+                a2dp.setHighQualityAudioEnabled(mCachedDevice.getDevice(), false);
+                bitrate = 0;
+                hdEnabled = false;
+            }
 
             if( bitRateSbcPref != null ) {
                 if (a2dp.isEnabled(device) ) {
@@ -189,7 +198,7 @@ public class BluetoothDetailsProfilesController extends BluetoothDetailsControll
                     bitRateSbcPref.setTitle("High Quality SBC");
                     bitRateSbcPref.setValue(String.valueOf(bitrate));
                     bitRateSbcPref.setSummary(bitRateSbcPref.getEntry());
-                    bitRateSbcPref.setEnabled(!a2dp.isHighQualityAudioEnabled(device) && !mCachedDevice.isBusy() && !isLeAudioEnabled);
+                    bitRateSbcPref.setEnabled((!a2dp.isHighQualityAudioEnabled(device) || bitrate != 0) && !mCachedDevice.isBusy() && !isLeAudioEnabled);
                 } else {
                     //bitRateSbcPref.setEnabled(false);
                     bitRateSbcPref.setVisible(false);
@@ -203,11 +212,12 @@ public class BluetoothDetailsProfilesController extends BluetoothDetailsControll
                     highQualityPref.setVisible(true);
                     highQualityPref.setTitle(a2dp.getHighQualityAudioOptionLabel(device));
                     highQualityPref.setChecked(a2dp.isHighQualityAudioEnabled(device));
-                    highQualityPref.setEnabled(bitrate == 0 && !mCachedDevice.isBusy() && !isLeAudioEnabled);
+                    highQualityPref.setEnabled((bitrate == 0 || a2dp.isHighQualityAudioEnabled(device)) && !mCachedDevice.isBusy() && !isLeAudioEnabled);
                 } else {
                     highQualityPref.setVisible(false);
                 }
             }
+
         }
     }
 
@@ -519,6 +529,7 @@ public class BluetoothDetailsProfilesController extends BluetoothDetailsControll
                                 hqaPref.setEnabled(true);
                             } else {
                                 hqaPref.setEnabled(false);
+                                bitRatePref.setEnabled(true);
                             }
                         }
                     }
