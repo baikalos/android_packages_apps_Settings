@@ -165,7 +165,7 @@ public abstract class NotificationPreferenceController extends AbstractPreferenc
     }
 
     protected boolean isAppBlockable() {
-        if (overrideCanBlock) {
+        /*if (overrideCanBlock) {
             return overrideCanBlockValue;
         }
         if (overrideCanConfigure) {
@@ -174,7 +174,7 @@ public abstract class NotificationPreferenceController extends AbstractPreferenc
         if (mAppRow != null) {
             boolean systemBlockable = !mAppRow.systemApp || (mAppRow.systemApp && mAppRow.banned);
             return systemBlockable && !mAppRow.lockedImportance;
-        }
+        }*/
         return true;
     }
 
