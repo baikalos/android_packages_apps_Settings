@@ -53,7 +53,18 @@ android_library {
         "SettingsLib-search-defaults",
     ],
 
-    srcs: ["src/**/*.java", "src/**/*.kt"],
+    srcs: [
+           "src/**/*.java",
+           "src/**/*.kt",
+           "BaikalSettings/src/**/*.java",
+           "BaikalSettings/src/**/*.kt",
+    ],
+
+    aaptflags: ["--extra-packages com.crdroid.settings"],
+
+    resource_dirs: ["res",
+                    "BaikalSettings/res"
+    ],
 
     static_libs: [
         "androidx-constraintlayout_constraintlayout",
@@ -63,7 +74,10 @@ android_library {
         "androidx.core_core",
         "androidx.appcompat_appcompat",
         "androidx.cardview_cardview",
+        "androidx.fragment_fragment",
+        "androidx.fragment_fragment-ktx",
         "androidx.preference_preference",
+        "androidx.preference_preference-ktx",
         "androidx.recyclerview_recyclerview",
         "androidx.window_window",
         "com.google.android.material_material",
@@ -93,6 +107,9 @@ android_library {
         "LineagePreferenceLib",
         "vendor.lineage.fastcharge-V1.0-java",
         "SystemUISharedLib",
+        "kotlin-stdlib",
+        "kotlinx_coroutines_android",
+        "kotlinx_coroutines",
     ],
 
     libs: [

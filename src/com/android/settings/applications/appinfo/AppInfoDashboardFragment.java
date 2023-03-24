@@ -34,6 +34,7 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.pm.UserInfo;
+import android.graphics.drawable.Drawable;
 import android.hardware.biometrics.BiometricManager;
 import android.hardware.biometrics.BiometricPrompt;
 import android.net.Uri;
@@ -55,6 +56,7 @@ import androidx.annotation.VisibleForTesting;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.SettingsPreferenceFragment;
+import com.android.settings.Utils;
 import com.android.settings.applications.manageapplications.ManageApplications;
 import com.android.settings.applications.specialaccess.interactacrossprofiles.InteractAcrossProfilesDetailsPreferenceController;
 import com.android.settings.applications.specialaccess.pictureinpicture.PictureInPictureDetailPreferenceController;
@@ -187,6 +189,8 @@ public class AppInfoDashboardFragment extends DashboardFragment
         appHibernationSettings.setPackage(packageName);
         use(AppHibernationPreferenceCategoryController.class).setChildren(
                 Arrays.asList(appHibernationSettings));
+
+        use(AppProfilePreferenceController.class).setParentFragment(this);
 
         final WriteSystemSettingsPreferenceController writeSystemSettings =
                 use(WriteSystemSettingsPreferenceController.class);

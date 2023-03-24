@@ -1,4 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          xmlns:tools="http://schemas.android.com/tools"
           package="com.android.settings"
           coreApp="true"
           android:sharedUserId="android.uid.system">
@@ -118,7 +119,7 @@
     <uses-permission android:name="android.permission.READ_SAFETY_CENTER_STATUS" />
     <uses-permission android:name="android.permission.SEND_SAFETY_CENTER_UPDATE" />
     <uses-permission android:name="android.permission.START_VIEW_APP_FEATURES" />
-    <uses-permission android:name="android.permission.CUSTOMIZE_SYSTEM_UI" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
 
     <application
             android:name=".SettingsApplication"
@@ -133,6 +134,7 @@
             android:defaultToDeviceProtectedStorage="true"
             android:directBootAware="true"
             android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+            tools:replace="android:appComponentFactory">
             android:enableOnBackInvokedCallback="true">
 
         <uses-library android:name="org.apache.http.legacy" />
@@ -4572,5 +4574,58 @@
         </activity>
 
         <!-- This is the longest AndroidManifest.xml ever. -->
+        <!-- Begin crDroid Settings -->
+        <activity android:name="Settings$BaikalSettingsLayoutActivity"
+                android:label="@string/crdroid_settings_title"
+                android:icon="@drawable/ic_homepage_crdroid"
+                android:exported="true"
+                android:taskAffinity="com.android.settings"
+                android:parentActivityName="Settings">
+            <intent-filter android:priority="1">
+                <action android:name="com.android.settings.action.SETTINGS"/>
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                       android:value="com.crdroid.settings.BaikalSettingsLayout" />
+            <meta-data android:name="com.android.settings.title"
+                       android:resource="@string/crdroid_settings_title" />
+            <meta-data android:name="com.android.settings.summary"
+                       android:resource="@string/crdroid_settings_summary"/>
+            <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
+                       android:value="true" />
+        </activity>
+        <activity android:name="com.crdroid.settings.fragments.about.ChangelogActivity"
+                android:label="@string/changelog_crdroid_title"
+                android:theme="@style/Theme.SubSettingsBase"
+                android:enabled="true"
+                android:exported="true"
+                android:taskAffinity="com.android.settings"
+                android:parentActivityName="Settings">
+            <intent-filter android:priority="70">
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <!-- Provide direct entry into Dev settings - Running Services -->
+        <activity android:name="Settings$DevRunningServicesActivity"
+                android:label="@string/runningservices_settings_title"
+                android:theme="@style/Theme.SubSettingsBase"
+                android:enabled="true"
+                android:exported="true"
+                android:excludeFromRecents="true"
+                android:taskAffinity="com.android.settings"
+                android:parentActivityName="Settings">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.MONKEY" />
+                <category android:name="android.intent.category.VOICE_LAUNCH" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.applications.RunningServices" />
+            <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
+                android:value="true" />
+        </activity>
+
     </application>
 </manifest>
