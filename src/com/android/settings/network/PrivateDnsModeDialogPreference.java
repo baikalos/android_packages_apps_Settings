@@ -56,6 +56,7 @@ import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedLockUtilsInternal;
 
 import com.google.common.net.InternetDomainName;
+import com.google.common.net.InetAddresses;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -293,7 +294,7 @@ public class PrivateDnsModeDialogPreference extends CustomDialogPreferenceCompat
         final Button saveButton = getSaveButton();
         if (saveButton != null) {
             saveButton.setEnabled(modeProvider
-                    ? InternetDomainName.isValid(mEditText.getText().toString())
+                    ? (InternetDomainName.isValid(mEditText.getText().toString()) || InetAddresses.isInetAddress(mEditText.getText().toString()) )
                     : true);
         }
     }
