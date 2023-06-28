@@ -66,11 +66,11 @@ public class PrivateDnsPreferenceController extends BasePreferenceController
     };
 
     // Only used in Settings, update on additions to ConnectivitySettingsUtils
-    private static final int PRIVATE_DNS_MODE_CLOUDFLARE = 4;
+    /*private static final int PRIVATE_DNS_MODE_CLOUDFLARE = 4;
     private static final int PRIVATE_DNS_MODE_ADGUARD = 5;
     private static final int PRIVATE_DNS_MODE_OPEN_DNS = 6;
     private static final int PRIVATE_DNS_MODE_CLEANBROWSING = 7;
-    private static final int PRIVATE_DNS_MODE_QUAD9 = 8;
+    private static final int PRIVATE_DNS_MODE_QUAD9 = 8;*/
 
     private final Handler mHandler;
     private final ContentObserver mSettingsObserver;
@@ -136,11 +136,11 @@ public class PrivateDnsPreferenceController extends BasePreferenceController
         switch (mode) {
             case PRIVATE_DNS_MODE_OFF:
                 return res.getString(R.string.private_dns_mode_off);
-            case PRIVATE_DNS_MODE_CLOUDFLARE:
-            case PRIVATE_DNS_MODE_ADGUARD:
-            case PRIVATE_DNS_MODE_OPEN_DNS:
-            case PRIVATE_DNS_MODE_CLEANBROWSING:
-            case PRIVATE_DNS_MODE_QUAD9:
+            //case PRIVATE_DNS_MODE_CLOUDFLARE:
+            //case PRIVATE_DNS_MODE_ADGUARD:
+            //case PRIVATE_DNS_MODE_OPEN_DNS:
+            //case PRIVATE_DNS_MODE_CLEANBROWSING:
+            //case PRIVATE_DNS_MODE_QUAD9:
             case PRIVATE_DNS_MODE_OPPORTUNISTIC:
                 return dnsesResolved ? res.getString(R.string.private_dns_mode_on)
                         : res.getString(R.string.private_dns_mode_opportunistic);
@@ -150,7 +150,7 @@ public class PrivateDnsPreferenceController extends BasePreferenceController
                 }
                 final String privateDnsHostname =
                         ConnectivitySettingsManager.getPrivateDnsHostname(mContext);
-                final String cloudflareHostname =
+                /* final String cloudflareHostname =
                         res.getString(R.string.private_dns_hostname_cloudflare);
                 final String adguardHostname =
                         res.getString(R.string.private_dns_hostname_adguard);
@@ -170,7 +170,7 @@ public class PrivateDnsPreferenceController extends BasePreferenceController
                     return res.getString(R.string.private_dns_mode_cleanbrowsing);
                 } else if (privateDnsHostname.equals(quad9Hostname)) {
                     return res.getString(R.string.private_dns_mode_quad9);
-                }
+                } */
                 return PrivateDnsModeDialogPreference.getHostnameFromSettings(cr);
         }
         return "";
