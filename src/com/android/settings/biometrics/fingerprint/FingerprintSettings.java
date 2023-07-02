@@ -248,9 +248,9 @@ public class FingerprintSettings extends SubSettings {
                     }
 
                     private void updateDialog() {
-                        if (!isUdfps() && mFingerprintWakeAndUnlock) {
+                        //if (isSfps() && mFingerprintWakeAndUnlock) {
                             setRequireScreenOnToAuthVisibility();
-                        }
+                        //}
                         RenameDialog renameDialog = (RenameDialog) getFragmentManager().
                                 findFragmentByTag(RenameDialog.class.getName());
                         if (renameDialog != null) {
@@ -524,9 +524,9 @@ public class FingerprintSettings extends SubSettings {
                         return true;
                     });
             mFingerprintUnlockCategory.setVisible(false);
-            if (!isUdfps() && mFingerprintWakeAndUnlock) {
+            //if (isSfps() && mFingerprintWakeAndUnlock) {
                 setRequireScreenOnToAuthVisibility();
-            }
+            //}
             setPreferenceScreen(root);
             return root;
         }
