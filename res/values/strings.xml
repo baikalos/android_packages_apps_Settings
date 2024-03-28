@@ -6496,6 +6496,7 @@
     <string name="battery_tip_early_heads_up_done_title">Battery Saver on</string>
     <!-- Accessibility description for battery saver learn more link [CHAR LIMIT=NONE] -->
     <string name="battery_saver_link_a11y">Learn more about Battery saver</string>
+    <string name="battery_saver_not_available">Android Battery Saver is not available in BaikalOS. Use BaikalOS Power Settings instead.</string>
     <!-- Summary when early heads up is solved [CHAR LIMIT=NONE] -->
     <string name="battery_tip_early_heads_up_done_summary">Some features may be limited</string>
     <!-- Title for the battery high usage tip [CHAR LIMIT=NONE] -->

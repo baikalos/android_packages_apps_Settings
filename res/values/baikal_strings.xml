@@ -18,4 +18,9 @@
     <!-- [CHAR LIMIT=NONE] App notification settings: link to app notification settings-->
     <string name="app_profile_link_title">BaikalOS Application Profile</string>
     <string name="app_profile_link_summary">BaikalOS specific application settings</string>
+
+     <!-- Force LTE_CA -->
+    <string name="force_lte_ca">Force LTE CA</string>
+    <string name="force_lte_ca_summary">Force LTE carrier aggregation to work</string>
+
 </resources>
