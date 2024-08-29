@@ -151,7 +151,7 @@ public class TetherEnabler implements SwitchWidgetController.OnSwitchChangeListe
         mUserManager = (UserManager) context.getSystemService(Context.USER_SERVICE);
         mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
         mBluetoothPan = bluetoothPan;
-        mDataSaverEnabled = mDataSaverBackend.isDataSaverEnabled();
+        mDataSaverEnabled = false; // mDataSaverBackend.isDataSaverEnabled();
         mListeners = new ArrayList<>();
         mMainThreadHandler = new Handler(Looper.getMainLooper());
         mEthernetManager = context.getSystemService(EthernetManager.class);

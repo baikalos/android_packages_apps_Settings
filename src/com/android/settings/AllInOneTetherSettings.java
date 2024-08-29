@@ -209,7 +209,7 @@ public class AllInOneTetherSettings extends RestrictedDashboardFragment
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
         mDataSaverBackend = new DataSaverBackend(getContext());
-        mDataSaverEnabled = mDataSaverBackend.isDataSaverEnabled();
+        mDataSaverEnabled = false; // mDataSaverBackend.isDataSaverEnabled();
         mDataSaverFooter = findPreference(KEY_DATA_SAVER_FOOTER);
         mWifiTetherGroup = findPreference(KEY_WIFI_TETHER_GROUP);
 
@@ -222,7 +222,7 @@ public class AllInOneTetherSettings extends RestrictedDashboardFragment
         mDataSaverBackend.addListener(this);
 
         // Set initial state based on Data Saver mode.
-        onDataSaverChanged(mDataSaverBackend.isDataSaverEnabled());
+        onDataSaverChanged(false /*mDataSaverBackend.isDataSaverEnabled()*/);
     }
 
     @Override

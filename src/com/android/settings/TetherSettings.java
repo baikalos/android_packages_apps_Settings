@@ -152,7 +152,7 @@ public class TetherSettings extends RestrictedSettingsFragment
         addPreferencesFromResource(R.xml.tether_prefs);
         mContext = getContext();
         mDataSaverBackend = new DataSaverBackend(mContext);
-        mDataSaverEnabled = mDataSaverBackend.isDataSaverEnabled();
+        mDataSaverEnabled = false; // mDataSaverBackend.isDataSaverEnabled();
         mDataSaverFooter = findPreference(KEY_DATA_SAVER_FOOTER);
 
         setIfOnlyAvailableForAdmins(true);
@@ -205,7 +205,7 @@ public class TetherSettings extends RestrictedSettingsFragment
         }
         if (!ethernetAvailable) getPreferenceScreen().removePreference(mEthernetTether);
         // Set initial state based on Data Saver mode.
-        onDataSaverChanged(mDataSaverBackend.isDataSaverEnabled());
+        onDataSaverChanged(false /*mDataSaverBackend.isDataSaverEnabled()*/);
     }
 
     @Override

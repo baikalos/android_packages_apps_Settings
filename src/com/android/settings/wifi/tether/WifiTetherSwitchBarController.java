@@ -160,7 +160,7 @@ public class WifiTetherSwitchBarController implements
     }
 
     private void updateWifiSwitch() {
-        mSwitchBar.setEnabled(!mDataSaverBackend.isDataSaverEnabled());
+        mSwitchBar.setEnabled(true /*!mDataSaverBackend.isDataSaverEnabled()*/);
     }
 
     @Override

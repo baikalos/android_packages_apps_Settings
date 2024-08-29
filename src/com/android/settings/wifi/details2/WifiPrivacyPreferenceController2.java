@@ -149,6 +149,7 @@ public class WifiPrivacyPreferenceController2 extends BasePreferenceController i
             case WifiConfiguration.RANDOMIZATION_NONE:
                 return WifiEntry.PRIVACY_DEVICE_MAC;
             case WifiConfiguration.RANDOMIZATION_PERSISTENT:
+            case WifiConfiguration.RANDOMIZATION_NON_PERSISTENT:
                 return WifiEntry.PRIVACY_RANDOMIZED_MAC;
             default:
                 return WifiEntry.PRIVACY_UNKNOWN;

@@ -290,9 +290,9 @@ public class AppStorageSettings extends AppInfoWithHeader
         final boolean appHasSpaceManagementUI = mAppEntry.info.manageSpaceActivityName != null;
         final boolean appHasActiveAdmins = mDpm.packageHasActiveAdmins(mPackageName);
         // Check that SYSTEM_APP flag is set, and ALLOW_CLEAR_USER_DATA is not set.
-        final boolean isNonClearableSystemApp =
-                (mAppEntry.info.flags & (FLAG_SYSTEM | FLAG_ALLOW_CLEAR_USER_DATA)) == FLAG_SYSTEM;
-        final boolean appRestrictsClearingData = isNonClearableSystemApp || appHasActiveAdmins;
+        final boolean isNonClearableSystemApp = false;
+                //(mAppEntry.info.flags & (FLAG_SYSTEM | FLAG_ALLOW_CLEAR_USER_DATA)) == FLAG_SYSTEM;
+        final boolean appRestrictsClearingData = false; // isNonClearableSystemApp || appHasActiveAdmins;
 
         final Intent intent = new Intent(Intent.ACTION_DEFAULT);
         if (appHasSpaceManagementUI) {
@@ -319,7 +319,7 @@ public class AppStorageSettings extends AppInfoWithHeader
         }
 
         if (mAppsControlDisallowedBySystem || AppUtils.isMainlineModule(mPm, mPackageName)) {
-            mButtonsPref.setButton1Enabled(false);
+            //mButtonsPref.setButton1Enabled(false);
         }
     }
 
@@ -583,7 +583,7 @@ public class AppStorageSettings extends AppInfoWithHeader
             }
         }
         if (mAppsControlDisallowedBySystem || AppUtils.isMainlineModule(mPm, mPackageName)) {
-            mButtonsPref.setButton1Enabled(false).setButton2Enabled(false);
+            //mButtonsPref.setButton1Enabled(false).setButton2Enabled(false);
         }
     }
 

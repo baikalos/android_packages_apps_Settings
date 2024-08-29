@@ -46,7 +46,7 @@ public abstract class TetherBasePreferenceController extends TogglePreferenceCon
         super(context, preferenceKey);
         mTm = context.getSystemService(TetheringManager.class);
         mDataSaverBackend = new DataSaverBackend(context);
-        mDataSaverEnabled = mDataSaverBackend.isDataSaverEnabled();
+        mDataSaverEnabled = false; // mDataSaverBackend.isDataSaverEnabled();
     }
 
     /**
