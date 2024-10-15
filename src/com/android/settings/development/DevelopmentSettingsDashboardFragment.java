@@ -58,6 +58,11 @@ import com.android.settings.development.bluetooth.BluetoothChannelModeDialogPref
 import com.android.settings.development.bluetooth.BluetoothCodecDialogPreferenceController;
 import com.android.settings.development.bluetooth.BluetoothHDAudioPreferenceController;
 import com.android.settings.development.bluetooth.BluetoothQualityDialogPreferenceController;
+import com.android.settings.development.bluetooth.BluetoothLHDCQualityDialogPreferenceController;
+import com.android.settings.development.bluetooth.BluetoothLHDCAudioLatencyDialogPreferenceController;
+import com.android.settings.development.bluetooth.BluetoothLHDCAudioArEffectDialogPreferenceController;
+import com.android.settings.development.bluetooth.BluetoothLHDCAudioLosslessDialogPreferenceController;
+import com.android.settings.development.bluetooth.BluetoothLHDCAudioLosslessRawDialogPreferenceController;
 import com.android.settings.development.bluetooth.BluetoothSampleRateDialogPreferenceController;
 import com.android.settings.development.qstile.DevelopmentTiles;
 import com.android.settings.development.storage.SharedDataPreferenceController;
@@ -615,6 +620,18 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
                 bluetoothA2dpConfigStore));
         controllers.add(new BluetoothQualityDialogPreferenceController(context, lifecycle,
                 bluetoothA2dpConfigStore));
+        // Savitech LHDC -- START
+        controllers.add(new BluetoothLHDCQualityDialogPreferenceController(context, lifecycle,
+                bluetoothA2dpConfigStore));
+        controllers.add(new BluetoothLHDCAudioLatencyDialogPreferenceController(context, lifecycle,
+                bluetoothA2dpConfigStore));
+        controllers.add(new BluetoothLHDCAudioArEffectDialogPreferenceController(context, lifecycle,
+                bluetoothA2dpConfigStore));
+        controllers.add(new BluetoothLHDCAudioLosslessDialogPreferenceController(context, lifecycle,
+                bluetoothA2dpConfigStore));
+        controllers.add(new BluetoothLHDCAudioLosslessRawDialogPreferenceController(context, lifecycle,
+                bluetoothA2dpConfigStore));
+        // Savitech LHDC -- END
         controllers.add(new BluetoothChannelModeDialogPreferenceController(context, lifecycle,
                 bluetoothA2dpConfigStore));
         controllers.add(new BluetoothHDAudioPreferenceController(context, lifecycle,
