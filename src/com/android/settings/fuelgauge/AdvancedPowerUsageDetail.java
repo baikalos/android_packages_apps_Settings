@@ -90,6 +90,7 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
     private static final String KEY_PREF_UNRESTRICTED = "unrestricted_pref";
     private static final String KEY_PREF_OPTIMIZED = "optimized_pref";
     private static final String KEY_PREF_RESTRICTED = "restricted_pref";
+    private static final String KEY_PREF_BAIKAL = "baikal_app_profile_pref";
     private static final String KEY_FOOTER_PREFERENCE = "app_usage_footer_preference";
     private static final String PACKAGE_NAME_NONE = "none";
 
@@ -112,12 +113,15 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
     Preference mBackgroundPreference;
     @VisibleForTesting
     FooterPreference mFooterPreference;
+    //@VisibleForTesting
+    //SelectorWithWidgetPreference mRestrictedPreference;
+    //@VisibleForTesting
+    //SelectorWithWidgetPreference mOptimizePreference;
+    //@VisibleForTesting
+    //SelectorWithWidgetPreference mUnrestrictedPreference;
     @VisibleForTesting
-    SelectorWithWidgetPreference mRestrictedPreference;
-    @VisibleForTesting
-    SelectorWithWidgetPreference mOptimizePreference;
-    @VisibleForTesting
-    SelectorWithWidgetPreference mUnrestrictedPreference;
+    Preference mBaikalPreference;
+
     @VisibleForTesting
     boolean mEnableTriState = true;
     @VisibleForTesting
@@ -374,7 +378,7 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
         final String stateString;
         final String footerString;
 
-        if (!mBatteryOptimizeUtils.isValidPackageName()) {
+        /*if (!mBatteryOptimizeUtils.isValidPackageName()) {
             // Present optimized only string when the package name is invalid.
             stateString = context.getString(R.string.manager_battery_usage_optimized_only);
             footerString = context.getString(
@@ -388,7 +392,7 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
             // Present default string to normal app.
             footerString = context.getString(R.string.manager_battery_usage_footer);
         }
-        mFooterPreference.setTitle(footerString);
+        mFooterPreference.setTitle(footerString);*/
         final Intent helpIntent = HelpUtils.getHelpIntent(context, context.getString(
                 R.string.help_url_app_usage_settings), /*backupContext=*/ "");
         if (helpIntent != null) {
@@ -426,9 +430,10 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
                 packageName, mState, REQUEST_UNINSTALL, REQUEST_REMOVE_DEVICE_ADMIN);
         controllers.add(mAppButtonsPreferenceController);
         if (mEnableTriState) {
-            controllers.add(new UnrestrictedPreferenceController(context, uid, packageName));
+            /*controllers.add(new UnrestrictedPreferenceController(context, uid, packageName));
             controllers.add(new OptimizedPreferenceController(context, uid, packageName));
-            controllers.add(new RestrictedPreferenceController(context, uid, packageName));
+            controllers.add(new RestrictedPreferenceController(context, uid, packageName));*/
+            controllers.add(new BaikalAppProfilePreferenceController(context, uid, packageName));
         } else {
             mBackgroundActivityPreferenceController = new BackgroundActivityPreferenceController(
                     context, this, uid, packageName);
@@ -464,10 +469,10 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
     @Override
     public void onRadioButtonClicked(SelectorWithWidgetPreference selected) {
         final String selectedKey = selected.getKey();
-        updatePreferenceState(mUnrestrictedPreference, selectedKey);
-        updatePreferenceState(mOptimizePreference, selectedKey);
-        updatePreferenceState(mRestrictedPreference, selectedKey);
-	mBatteryOptimizeUtils.setAppUsageState(getSelectedPreference());
+        //updatePreferenceState(mUnrestrictedPreference, selectedKey);
+        //updatePreferenceState(mOptimizePreference, selectedKey);
+        //updatePreferenceState(mRestrictedPreference, selectedKey);
+    	//mBatteryOptimizeUtils.setAppUsageState(getSelectedPreference());
     }
 
     private void updatePreferenceState(SelectorWithWidgetPreference preference,
@@ -506,28 +511,32 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
     }
 
     private void onCreateForTriState(String packageName) {
-        mUnrestrictedPreference = findPreference(KEY_PREF_UNRESTRICTED);
-        mOptimizePreference = findPreference(KEY_PREF_OPTIMIZED);
-        mRestrictedPreference = findPreference(KEY_PREF_RESTRICTED);
+        //mUnrestrictedPreference = findPreference(KEY_PREF_UNRESTRICTED);
+        //mOptimizePreference = findPreference(KEY_PREF_OPTIMIZED);
+        //mRestrictedPreference = findPreference(KEY_PREF_RESTRICTED);
+
+        mBaikalPreference = findPreference(KEY_PREF_BAIKAL);
         mFooterPreference = findPreference(KEY_FOOTER_PREFERENCE);
-        mUnrestrictedPreference.setOnClickListener(this);
-        mOptimizePreference.setOnClickListener(this);
-        mRestrictedPreference.setOnClickListener(this);
+        //mBaikalPreference.setOnClickListener(this);
+
+        //mUnrestrictedPreference.setOnClickListener(this);
+        //mOptimizePreference.setOnClickListener(this);
+        //mRestrictedPreference.setOnClickListener(this);
 
         mBatteryOptimizeUtils = new BatteryOptimizeUtils(
                 getContext(), getArguments().getInt(EXTRA_UID), packageName);
     }
 
     private int getSelectedPreference() {
-        if (mRestrictedPreference.isChecked()) {
+        /*if (mRestrictedPreference.isChecked()) {
             return BatteryOptimizeUtils.MODE_RESTRICTED;
         } else if (mUnrestrictedPreference.isChecked()) {
             return BatteryOptimizeUtils.MODE_UNRESTRICTED;
         } else if (mOptimizePreference.isChecked()) {
             return BatteryOptimizeUtils.MODE_OPTIMIZED;
-        } else {
+        } else {*/
             return BatteryOptimizeUtils.MODE_UNKNOWN;
-        }
+        //}
     }
 
     private CharSequence getAppActiveTime(Bundle bundle) {

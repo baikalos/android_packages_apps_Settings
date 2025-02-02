@@ -17,4 +17,8 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="app_profile_link_title">"Профиль приложения BaikalOS"</string>
     <string name="app_profile_link_summary">"Настройки приложения специфичные для BaikalOS"</string>
+
+    <!-- Footer for the manage battery usage page [CHAR_LIMIT=NONE] -->
+    <string name="manager_battery_usage_footer_baikal">Настройки Андроид для фоновой активности приложения недоступны в BaikalOS. Используйте профиль приложения BaikalOS для настройки фоновой активности.</string>
+
 </resources>

@@ -27,7 +27,7 @@
     <com.android.settingslib.widget.ActionButtonsPreference
         android:key="action_buttons"/>
 
-    <com.android.settingslib.widget.SelectorWithWidgetPreference
+    <!-- com.android.settingslib.widget.SelectorWithWidgetPreference
         android:key="unrestricted_pref"
         android:summary="@string/manager_battery_usage_unrestricted_summary"
         android:title="@string/manager_battery_usage_unrestricted_title"
@@ -43,11 +43,20 @@
         android:key="restricted_pref"
         android:summary="@string/manager_battery_usage_restricted_summary"
         android:title="@string/manager_battery_usage_restricted_title"
-        settings:controller="com.android.settings.fuelgauge.RestrictedPreferenceController"/>
+        settings:controller="com.android.settings.fuelgauge.RestrictedPreferenceController"/ -->
+
+    <Preference
+        android:key="baikal_app_profile_pref"
+        android:title="@string/app_profile_link_title"
+        android:summary="@string/app_profile_link_summary"
+        settings:controller="com.android.settings.fuelgauge.BaikalAppProfilePreferenceController"
+        settings:allowDividerBelow="true"
+        settings:allowDividerAbove="true" />
+
 
     <com.android.settingslib.widget.FooterPreference
         android:key="app_usage_footer_preference"
-        android:title="@string/manager_battery_usage_footer"
+        android:title="@string/manager_battery_usage_footer_baikal"
         android:selectable="false"
         settings:searchable="false"/>
 

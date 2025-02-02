@@ -23,4 +23,7 @@
     <string name="force_lte_ca">Force LTE CA</string>
     <string name="force_lte_ca_summary">Force LTE carrier aggregation to work</string>
 
+    <!-- Footer for the manage battery usage page [CHAR_LIMIT=NONE] -->
+    <string name="manager_battery_usage_footer_baikal">Android settings for background app activity are not available in BaikalOS. Use BaikalOS app profile to configure background activity.</string>
+
 </resources>
