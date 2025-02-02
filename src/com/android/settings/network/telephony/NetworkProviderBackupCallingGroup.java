@@ -19,6 +19,7 @@ import static androidx.lifecycle.Lifecycle.Event;
 
 import android.content.Context;
 import android.os.PersistableBundle;
+import android.os.SystemProperties;
 import android.telephony.CarrierConfigManager;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
@@ -243,11 +244,18 @@ public class NetworkProviderBackupCallingGroup extends
     protected boolean isCrossSimEnabledByPlatform(Context context, int subscriptionId) {
         // TODO : Change into API which created for accessing
         //        com.android.ims.ImsManager#isCrossSimEnabledByPlatform()
+
+        boolean force = SystemProperties.getInt("persist.baikal.ims.force_cs",0) != 0;
+        if( force ) {
+            Log.d(TAG, "Forced by baikalos. subId = " + subscriptionId);
+            return true;
+        } 
+
         if ((new WifiCallingQueryImsState(context, subscriptionId)).isWifiCallingSupported()) {
             PersistableBundle bundle = getCarrierConfigForSubId(subscriptionId);
             return (bundle != null) && bundle.getBoolean(
                     CarrierConfigManager.KEY_CARRIER_CROSS_SIM_IMS_AVAILABLE_BOOL,
-                    false /*default*/);
+                    true /*default*/);
         }
         Log.d(TAG, "WifiCalling is not supported by framework. subId = " + subscriptionId);
         return false;

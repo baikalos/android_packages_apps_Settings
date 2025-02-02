@@ -26,6 +26,7 @@ import android.content.IntentFilter;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.PersistableBundle;
+import android.os.SystemProperties;
 import android.telephony.CarrierConfigManager;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyCallback;
@@ -149,10 +150,17 @@ public class WifiCallingSettingsForSub extends SettingsPreferenceFragment
                     PersistableBundle b = configManager.getConfigForSubId(
                             WifiCallingSettingsForSub.this.mSubId);
                     if (b != null) {
-                        isWfcModeEditable = b.getBoolean(
+                        boolean force = SystemProperties.getInt("persist.baikal.ims.force_wfc",0) != 0;
+                        if( force ) {
+                            isWfcModeEditable = true;
+                            isWfcRoamingModeEditable = true;
+                        } else {
+    
+                            isWfcModeEditable = b.getBoolean(
                                 CarrierConfigManager.KEY_EDITABLE_WFC_MODE_BOOL);
-                        isWfcRoamingModeEditable = b.getBoolean(
+                            isWfcRoamingModeEditable = b.getBoolean(
                                 CarrierConfigManager.KEY_EDITABLE_WFC_ROAMING_MODE_BOOL);
+                        }
                     }
                 }
             } else {
@@ -351,15 +359,23 @@ public class WifiCallingSettingsForSub extends SettingsPreferenceFragment
         if (configManager != null) {
             final PersistableBundle b = configManager.getConfigForSubId(mSubId);
             if (b != null) {
-                mEditableWfcMode = b.getBoolean(
-                        CarrierConfigManager.KEY_EDITABLE_WFC_MODE_BOOL);
-                mEditableWfcRoamingMode = b.getBoolean(
-                        CarrierConfigManager.KEY_EDITABLE_WFC_ROAMING_MODE_BOOL);
-                mUseWfcHomeModeForRoaming = b.getBoolean(
-                        CarrierConfigManager.KEY_USE_WFC_HOME_NETWORK_MODE_IN_ROAMING_NETWORK_BOOL,
-                        false);
-                isWifiOnlySupported = b.getBoolean(
-                        CarrierConfigManager.KEY_CARRIER_WFC_SUPPORTS_WIFI_ONLY_BOOL, true);
+                boolean force = SystemProperties.getInt("persist.baikal.ims.force_wfc",0) != 0;
+                    if( force ) {
+                        mEditableWfcMode = true;
+                        mEditableWfcRoamingMode = true;
+                        mUseWfcHomeModeForRoaming = true;
+                        isWifiOnlySupported = true;
+                    } else {
+                        mEditableWfcMode = b.getBoolean(
+                            CarrierConfigManager.KEY_EDITABLE_WFC_MODE_BOOL);
+                        mEditableWfcRoamingMode = b.getBoolean(
+                            CarrierConfigManager.KEY_EDITABLE_WFC_ROAMING_MODE_BOOL);
+                        mUseWfcHomeModeForRoaming = b.getBoolean(
+                            CarrierConfigManager.KEY_USE_WFC_HOME_NETWORK_MODE_IN_ROAMING_NETWORK_BOOL,
+                                false);
+                        isWifiOnlySupported = b.getBoolean(
+                            CarrierConfigManager.KEY_CARRIER_WFC_SUPPORTS_WIFI_ONLY_BOOL, true);
+                    }
             }
         }
 

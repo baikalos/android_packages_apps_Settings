@@ -29,6 +29,7 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.net.Uri;
 import android.os.PersistableBundle;
+import android.os.SystemProperties;
 import android.provider.Settings;
 import android.telephony.CarrierConfigManager;
 import android.telephony.SubscriptionManager;
@@ -214,9 +215,13 @@ public class WifiCallingSliceHelper {
         }
 
         final boolean isWifiCallingPrefEditable = isCarrierConfigManagerKeyEnabled(
-                CarrierConfigManager.KEY_EDITABLE_WFC_MODE_BOOL, subId, false);
+                CarrierConfigManager.KEY_EDITABLE_WFC_MODE_BOOL, subId, false)
+                || SystemProperties.getInt("persist.baikal.ims.force_wfc",0) != 0;
         final boolean isWifiOnlySupported = isCarrierConfigManagerKeyEnabled(
-                CarrierConfigManager.KEY_CARRIER_WFC_SUPPORTS_WIFI_ONLY_BOOL, subId, true);
+                CarrierConfigManager.KEY_CARRIER_WFC_SUPPORTS_WIFI_ONLY_BOOL, subId, true) 
+                || SystemProperties.getInt("persist.baikal.ims.force_wfc",0) != 0;
+
+
 
         if (!isWifiCallingPrefEditable) {
             Log.d(TAG, "Wifi calling preference is not editable");
@@ -418,9 +423,12 @@ public class WifiCallingSliceHelper {
 
         if (SubscriptionManager.isValidSubscriptionId(subId)) {
             final boolean isWifiCallingPrefEditable = isCarrierConfigManagerKeyEnabled(
-                    CarrierConfigManager.KEY_EDITABLE_WFC_MODE_BOOL, subId, false);
+                    CarrierConfigManager.KEY_EDITABLE_WFC_MODE_BOOL, subId, false) 
+                    || SystemProperties.getInt("persist.baikal.ims.force_wfc",0) != 0;
+
             final boolean isWifiOnlySupported = isCarrierConfigManagerKeyEnabled(
-                    CarrierConfigManager.KEY_CARRIER_WFC_SUPPORTS_WIFI_ONLY_BOOL, subId, true);
+                    CarrierConfigManager.KEY_CARRIER_WFC_SUPPORTS_WIFI_ONLY_BOOL, subId, true) 
+                    || SystemProperties.getInt("persist.baikal.ims.force_wfc",0) != 0;
 
             final WifiCallingQueryImsState queryState = queryImsState(subId);
             if (isWifiCallingPrefEditable
