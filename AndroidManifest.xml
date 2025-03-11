@@ -4033,10 +4033,10 @@
             </intent-filter>
         </activity>
 
-        <service
+        <!-- service
             android:name=".SettingsDumpService"
             android:exported="true"
-            android:permission="android.permission.DUMP" />
+            android:permission="android.permission.DUMP" / -->
 
         <!-- Quick Settings tiles for Developer Options -->
         <service
