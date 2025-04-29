@@ -214,7 +214,7 @@ import com.android.settings.wifi.p2p.WifiP2pSettings;
 import com.android.settings.wifi.savedaccesspoints2.SavedAccessPointsWifiSettings2;
 import com.android.settings.wifi.tether.WifiTetherSettings;
 
-import com.crdroid.settings.crDroidSettingsLayout;
+import com.crdroid.settings.BaikalSettingsLayout;
 import com.crdroid.settings.fragments.ui.SmartPixels;
 
 public class SettingsGateway {
@@ -417,7 +417,7 @@ public class SettingsGateway {
             ZenModesListFragment.class.getName(),
             ZenModeFragment.class.getName(),
             ContactsStorageSettings.class.getName(),
-            crDroidSettingsLayout.class.getName(),
+            BaikalSettingsLayout.class.getName(),
             RunningServices.class.getName(),
             SmartPixels.class.getName(),
             PrivateDnsSettings.class.getName(),
@@ -467,7 +467,7 @@ public class SettingsGateway {
             UserBackupSettingsActivity.class.getName(),
             Settings.MemtagPageActivity.class.getName(),
             Settings.NavigationModeSettingsActivity.class.getName(),
-            Settings.crDroidSettingsLayoutActivity.class.getName(),
+            Settings.BaikalSettingsLayoutActivity.class.getName(),
             Settings.DevRunningServicesActivity.class.getName(),
             Settings.SmartPixelsActivity.class.getName(),
             Settings.PrivateDnsSettingsActivity.class.getName(),

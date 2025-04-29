@@ -74,7 +74,7 @@ class BluetoothTetherSwitchPreference :
             else -> {}
         }
         val dataSaverBackend = DataSaverBackend(context)
-        return !dataSaverBackend.isDataSaverEnabled
+        return true //!dataSaverBackend.isDataSaverEnabled
     }
 
     override fun getReadPermit(context: Context, myUid: Int, callingUid: Int) =

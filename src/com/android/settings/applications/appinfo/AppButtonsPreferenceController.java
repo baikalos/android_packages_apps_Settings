@@ -530,12 +530,12 @@ public class AppButtonsPreferenceController extends BasePreferenceController imp
             // User can't force stop device admin.
             Log.w(TAG, "User can't force stop device admin");
             updateForceStopButtonInner(false /* enabled */);
-        } else if ((mAppEntry.info.flags & ApplicationInfo.FLAG_STOPPED) == 0) {
+        } /*else if ((mAppEntry.info.flags & ApplicationInfo.FLAG_STOPPED) == 0) {
             // If the app isn't explicitly stopped, then always show the
             // force stop button.
             Log.w(TAG, "App is not explicitly stopped");
-            updateForceStopButtonInner(true /* enabled */);
-        } else {
+            updateForceStopButtonInner(true / * enabled * /);
+        } */ else {
             Intent intent = new Intent(Intent.ACTION_QUERY_PACKAGE_RESTART,
                     Uri.fromParts("package", mAppEntry.info.packageName, null));
             intent.setPackage("android");
@@ -585,10 +585,10 @@ public class AppButtonsPreferenceController extends BasePreferenceController imp
                 Context.ACTIVITY_SERVICE);
         Log.d(TAG, "Stopping package " + pkgName);
         if (android.app.Flags.appRestrictionsApi()) {
-            am.noteAppRestrictionEnabled(pkgName, mAppEntry.info.uid,
+            /*am.noteAppRestrictionEnabled(pkgName, mAppEntry.info.uid,
                     ActivityManager.RESTRICTION_LEVEL_FORCE_STOPPED, true,
                     ActivityManager.RESTRICTION_REASON_USER,
-                    "settings", ActivityManager.RESTRICTION_SOURCE_USER, 0L);
+                    "settings", ActivityManager.RESTRICTION_SOURCE_USER, 0L);*/
         }
         am.forceStopPackage(pkgName);
         int userId = UserHandle.getUserId(mAppEntry.info.uid);
@@ -611,6 +611,8 @@ public class AppButtonsPreferenceController extends BasePreferenceController imp
             // Disable button for core system applications.
             mButtonsPref.setButton2Text(R.string.disable_text)
                     .setButton2Icon(R.drawable.ic_settings_disable);
+            disableable = !mApplicationFeatureProvider.getKeepEnabledPackages()
+                    .contains(mAppEntry.info.packageName);
         } else if (mAppEntry.info.enabled && !isDisabledUntilUsed()) {
             mButtonsPref.setButton2Text(R.string.disable_text)
                     .setButton2Icon(R.drawable.ic_settings_disable);

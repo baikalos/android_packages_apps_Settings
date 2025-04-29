@@ -131,9 +131,10 @@ public class EnabledNetworkModePreferenceController extends
 
     @Override
     public int getAvailabilityStatus() {
-        return getNetworkModePreferenceType(mContext, mSubId)
+        /*return getNetworkModePreferenceType(mContext, mSubId)
                 == NetworkModePreferenceType.EnabledNetworkMode
-                ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
+                ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;*/
+        return CONDITIONALLY_UNAVAILABLE;
     }
 
     protected boolean isCallStateIdle() {

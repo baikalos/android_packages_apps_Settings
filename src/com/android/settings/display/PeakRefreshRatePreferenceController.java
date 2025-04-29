@@ -104,7 +104,7 @@ public class PeakRefreshRatePreferenceController extends TogglePreferenceControl
         final float peakRefreshRate =
                 Settings.System.getFloat(
                         mContext.getContentResolver(),
-                        Settings.System.PEAK_REFRESH_RATE,
+                        Settings.System.BAIKALOS_DEFAULT_MAXFPS,
                         getDefaultPeakRefreshRate());
         return Math.round(peakRefreshRate) == Math.round(mPeakRefreshRate)
                 || Float.isInfinite(peakRefreshRate);
@@ -118,7 +118,7 @@ public class PeakRefreshRatePreferenceController extends TogglePreferenceControl
         Log.d(TAG, "setChecked to : " + peakRefreshRate);
 
         return Settings.System.putFloat(
-                mContext.getContentResolver(), Settings.System.PEAK_REFRESH_RATE, peakRefreshRate);
+                mContext.getContentResolver(), Settings.System.BAIKALOS_DEFAULT_MAXFPS, peakRefreshRate);
     }
 
     @Override

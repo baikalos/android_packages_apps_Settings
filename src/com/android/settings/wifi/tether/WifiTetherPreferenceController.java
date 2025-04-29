@@ -220,7 +220,7 @@ public class WifiTetherPreferenceController extends AbstractPreferenceController
      * Sets the Data Saver state for preference update.
      */
     public void setDataSaverEnabled(boolean enabled) {
-        mIsDataSaverEnabled = enabled;
+        mIsDataSaverEnabled = false; //enabled;
         if (mPreference != null) {
             mPreference.setEnabled(canEnabled());
         }

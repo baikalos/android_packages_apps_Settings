@@ -100,9 +100,11 @@ public class PreferredNetworkModePreferenceController extends BasePreferenceCont
 
     @Override
     public int getAvailabilityStatus() {
-        return getNetworkModePreferenceType(mContext, mSubId)
+        /*return getNetworkModePreferenceType(mContext, mSubId)
                 == NetworkModePreferenceType.PreferredNetworkMode
-                ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
+                ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;*/
+
+        return AVAILABLE;
     }
 
     @Override

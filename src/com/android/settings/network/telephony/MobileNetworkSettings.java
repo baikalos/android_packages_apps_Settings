@@ -339,6 +339,8 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
                 useGroup(AbstractSubscriptionPreferenceController.class);
         subscriptionPreferenceControllers.forEach(
                 controller -> ((AbstractSubscriptionPreferenceController) controller).init(mSubId));
+
+        use(ForceLteCaPreferenceController.class).init(mSubId);
     }
 
     @Override

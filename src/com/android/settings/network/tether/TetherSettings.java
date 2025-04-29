@@ -166,7 +166,7 @@ public class TetherSettings extends RestrictedDashboardFragment
 
         mContext = getContext();
         mDataSaverBackend = new DataSaverBackend(mContext);
-        mDataSaverEnabled = mDataSaverBackend.isDataSaverEnabled();
+        mDataSaverEnabled = false; // mDataSaverBackend.isDataSaverEnabled();
         mDataSaverFooter = findPreference(KEY_DATA_SAVER_FOOTER);
 
         setupTetherPreference();
@@ -269,7 +269,7 @@ public class TetherSettings extends RestrictedDashboardFragment
 
     @Override
     public void onDataSaverChanged(boolean isDataSaving) {
-        mDataSaverEnabled = isDataSaving;
+        mDataSaverEnabled = false; // isDataSaving;
         if (!isCatalystEnabled()) {
             mWifiTetherPreferenceController.setDataSaverEnabled(mDataSaverEnabled);
         }
