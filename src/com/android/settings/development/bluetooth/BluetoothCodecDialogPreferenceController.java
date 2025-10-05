@@ -149,16 +149,16 @@ public class BluetoothCodecDialogPreferenceController extends
         }
         
                 /* Savitech LHDC patch: use default when codec switching */
-        if (codecTypeValue == BluetoothCodecConfig.SOURCE_CODEC_TYPE_LHDCV3 ||
+        /*if (codecTypeValue == BluetoothCodecConfig.SOURCE_CODEC_TYPE_LHDCV3 ||
             codecTypeValue == BluetoothCodecConfig.SOURCE_CODEC_TYPE_LHDCV5) {
             mBluetoothA2dpConfigStore.setSampleRate(BluetoothCodecConfig.BITS_PER_SAMPLE_NONE);
             mBluetoothA2dpConfigStore.setBitsPerSample(BluetoothCodecConfig.BITS_PER_SAMPLE_NONE);
             mBluetoothA2dpConfigStore.setChannelMode(BluetoothCodecConfig.CHANNEL_MODE_NONE);
-        } else {
+        } else {*/
 	        mBluetoothA2dpConfigStore.setSampleRate(getHighestSampleRate(config));
         	mBluetoothA2dpConfigStore.setBitsPerSample(getHighestBitsPerSample(config));
         	mBluetoothA2dpConfigStore.setChannelMode(getHighestChannelMode(config));
-        }
+        //}
     }
 
     @Override

@@ -127,7 +127,7 @@ public class AppStateAlarmsAndRemindersBridge extends AppStateBaseBridge {
 
         /** Should the app associated with this state appear on the Settings screen */
         public boolean shouldBeVisible() {
-            return mPermissionRequested;
+            return true; //mPermissionRequested;
         }
 
         /** Is the permission granted to the app associated with this state */
