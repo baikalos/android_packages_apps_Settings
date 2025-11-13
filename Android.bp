@@ -113,6 +113,7 @@ android_library {
         "SettingsLibMetadata",
         "SettingsLibPreference",
         "SettingsLibService",
+        "SettingsProviderLib",
         "aconfig_settings_flags_lib",
         "accessibility_settings_flags_lib",
         "contextualcards",

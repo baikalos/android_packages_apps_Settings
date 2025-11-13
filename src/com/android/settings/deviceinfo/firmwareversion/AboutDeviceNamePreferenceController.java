@@ -53,9 +53,11 @@ public class AboutDeviceNamePreferenceController extends BasePreferenceControlle
                 mContext.getString(R.string.device_info_default));
         String deviceCodename = SystemProperties.get(KEY_DEVICE_NAME_PROP,
                 mContext.getString(R.string.device_info_default));
-        String deviceModel = Build.MODEL;
         String deviceMarketname = SystemProperties.get(KEY_MARKET_NAME_PROP,
-                deviceBrand + " " + deviceModel);
+                deviceBrand + " " + Build.MODEL);
+        deviceMarketname =
+                mContext.getResources().getString(com.android.providers.settings.R.string.def_device_name_simple,
+                deviceMarketname);
         return deviceMarketname + " | " + deviceCodename;
     }
 }

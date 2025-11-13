@@ -46,6 +46,7 @@ public class DeviceNamePreferenceController extends BasePreferenceController
         OnSaveInstanceState,
         OnCreate {
 
+    private static final String KEY_BRAND_NAME_PROP = "ro.product.manufacturer";
     private static final String KEY_MARKET_NAME_PROP = "ro.product.marketname";
     private static final String KEY_PENDING_DEVICE_NAME = "key_pending_device_name";
     @VisibleForTesting
@@ -82,7 +83,13 @@ public class DeviceNamePreferenceController extends BasePreferenceController
         mDeviceName = Settings.Global.getString(mContext.getContentResolver(),
                 Settings.Global.DEVICE_NAME);
         if (mDeviceName == null) {
-            mDeviceName = SystemProperties.get(KEY_MARKET_NAME_PROP, Build.MODEL);
+            String deviceBrand = SystemProperties.get(KEY_BRAND_NAME_PROP,
+                    mContext.getString(R.string.device_info_default));
+            String deviceMarketname = SystemProperties.get(KEY_MARKET_NAME_PROP,
+                    deviceBrand + " " + Build.MODEL);
+            mDeviceName = mContext.getResources().getString(
+                    com.android.providers.settings.R.string.def_device_name_simple,
+                    deviceMarketname);
         }
     }
 
