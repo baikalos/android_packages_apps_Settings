@@ -143,6 +143,7 @@ private fun AppInfoSettings(packageInfoPresenter: PackageInfoPresenter) {
         AppButtons(packageInfoPresenter, isHibernationSwitchEnabledStateFlow)
 
         Category {
+            AppBaikalPreference(app)
             AppSettingsPreference(app)
             AppAllServicesPreference(app)
             AppNotificationPreference(app)
