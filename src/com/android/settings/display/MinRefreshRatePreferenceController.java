@@ -16,7 +16,7 @@
 
 package com.android.settings.display;
 
-import static android.provider.Settings.System.MIN_REFRESH_RATE;
+//import static android.provider.Settings.System.MIN_REFRESH_RATE;
 
 import android.content.Context;
 import android.provider.Settings;
@@ -85,7 +85,7 @@ public class MinRefreshRatePreferenceController extends BasePreferenceController
     @Override
     public void updateState(Preference preference) {
         final float currentValue = Settings.System.getFloat(mContext.getContentResolver(),
-                MIN_REFRESH_RATE, 60.00f);
+                Settings.System.BAIKALOS_DEFAULT_MINFPS, 60.00f);
         int index = mListPreference.findIndexOfValue(
                 String.format(Locale.US, "%.02f", currentValue));
         if (index < 0) index = 0;
@@ -95,7 +95,7 @@ public class MinRefreshRatePreferenceController extends BasePreferenceController
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
-        Settings.System.putFloat(mContext.getContentResolver(), MIN_REFRESH_RATE,
+        Settings.System.putFloat(mContext.getContentResolver(), Settings.System.BAIKALOS_DEFAULT_MINFPS,
                 Float.valueOf((String) newValue));
         updateState(preference);
         return true;
