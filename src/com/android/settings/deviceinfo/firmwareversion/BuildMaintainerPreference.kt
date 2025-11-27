@@ -207,7 +207,7 @@ class BuildMaintainerPreference :
 
     private fun getCodenameCandidates(): Set<String> {
         val result = LinkedHashSet<String>()
-        addIfNotEmpty(result, SystemProperties.get("ro.crdroid.device", null))
+        addIfNotEmpty(result, SystemProperties.get("ro.baikalos.device", null))
         addIfNotEmpty(result, SystemProperties.get("ro.product.device", null))
         addIfNotEmpty(result, SystemProperties.get("ro.product.vendor.device", null))
         addIfNotEmpty(result, SystemProperties.get("ro.build.product", null))
@@ -304,11 +304,11 @@ class BuildMaintainerPreference :
         private const val PLATFORM_PACKAGE = "android"
 
         private const val OTA_JSON_URL =
-            "https://raw.githubusercontent.com/crdroidandroid/" +
-                "android_vendor_crDroidOTA/refs/heads/17.0/%s.json"
+            "https://raw.githubusercontent.com/baikalos/" +
+                "android_vendor_BaikalOTA/refs/heads/17.0/%s.json"
 
         private val OFFICIAL_PLATFORM_CERT_SHA256: Set<String> = setOf(
-            "73fdfbf41fe6255a3fbc3cfda8b6666f4124f940f499bdd82f1566da68e45732",
+            "55bbd43e0086f803d9e78077e7a429f0959522e0413f4620320fbd2e1bef58b0",
         )
 
         @Volatile private var officialSigned: Boolean? = null
