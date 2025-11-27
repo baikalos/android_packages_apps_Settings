@@ -25,6 +25,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.res.ColorStateList;
 import android.os.Bundle;
+import android.os.SystemProperties;
 import android.os.UserManager;
 import android.provider.Settings;
 import android.telephony.CarrierConfigManager;
@@ -386,6 +387,8 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
                 Settings.Global.FORCE_LTE_CA + "_" + phoneId,
                 enabled ? 1 : 0
             );
+            Log.d(LOG_TAG, "persist.sys.radio.force_lte_ca: " + enabled);
+            SystemProperties.set("persist.sys.radio.force_lte_ca", String.valueOf(enabled));
             return true;
         });
 
@@ -447,6 +450,7 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
                     getContext().getContentResolver(),
                     Settings.Global.FORCE_LTE_CA + "_" + phoneId,
                     0) == 1;
+            enabled = SystemProperties.getBoolean("persist.sys.radio.force_lte_ca", false);
             mForceLteCAPreference.setChecked(enabled);
         }
     }
