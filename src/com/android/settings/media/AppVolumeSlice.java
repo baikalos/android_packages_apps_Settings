@@ -78,13 +78,25 @@ public class AppVolumeSlice implements CustomSliceable {
         final ListBuilder listBuilder = new ListBuilder(mContext, getUri(), ListBuilder.INFINITY)
                 .setAccentColor(COLOR_NOT_TINTED);
 
+        String topAppPackageName = mContext.getBaikalContext().getTopAppPackageName();
+         Log.d(TAG, "topAppPackageName:" + topAppPackageName);
         // Only displaying active tracks
         final List<AppVolume> appVols = new ArrayList<>();
         for (AppVolume vol : mAudioManager.listAppVolumes()) {
-            if (vol.isActive()) {
+            if (vol.isActive() || vol.getPackageName().equals(topAppPackageName)) {
                 appVols.add(vol);
             }
         }
+
+        if( appVols.isEmpty() ) {
+            boolean isSettings = topAppPackageName.equals("com.android.settings");
+            if( isSettings ) {
+                for (AppVolume vol : mAudioManager.listAppVolumes()) {
+                    appVols.add(vol);
+                }
+            }
+        }
+
         if (appVols.isEmpty()) {
             Log.d(TAG, "No active tracks");
             return listBuilder.build();
