@@ -21,6 +21,7 @@ import static com.android.settings.SettingsActivity.EXTRA_FRAGMENT_ARG_KEY;
 import android.content.Context;
 import android.icu.text.MessageFormat;
 import android.os.Bundle;
+import android.util.Log;
 
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
@@ -38,6 +39,8 @@ import java.util.Map;
 
 public class AppNotificationPreferenceController extends AppInfoPreferenceControllerBase {
 
+    private static final String TAG = "AppNotificationPreferenceController";
+
     private String mChannelId = null;
 
     // Used for updating notification preference.
@@ -45,6 +48,7 @@ public class AppNotificationPreferenceController extends AppInfoPreferenceContro
 
     public AppNotificationPreferenceController(Context context, String key) {
         super(context, key);
+        Log.w(TAG, "BaikalAppProfilePreferenceController:ctor");
     }
 
     @Override
@@ -54,6 +58,7 @@ public class AppNotificationPreferenceController extends AppInfoPreferenceContro
                 && parent.getActivity().getIntent() != null) {
             mChannelId = parent.getActivity().getIntent().getStringExtra(EXTRA_FRAGMENT_ARG_KEY);
         }
+        Log.w(TAG, "BaikalAppProfilePreferenceController:setParentFragment");
     }
 
     @Override
@@ -69,6 +74,7 @@ public class AppNotificationPreferenceController extends AppInfoPreferenceContro
 
     @Override
     protected Class<? extends SettingsPreferenceFragment> getDetailFragmentClass() {
+        Log.w(TAG, "BaikalAppProfilePreferenceController:getDetailFragmentClass");
         return AppNotificationSettings.class;
     }
 
