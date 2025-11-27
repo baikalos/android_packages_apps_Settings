@@ -116,7 +116,7 @@ public class PeakRefreshRateListPreferenceController extends BasePreferenceContr
     @Override
     public void updateState(Preference preference) {
         final float currentValue = Settings.System.getFloat(mContext.getContentResolver(),
-                Settings.System.PEAK_REFRESH_RATE, getDefaultPeakRefreshRate());
+                Settings.System.BAIKALOS_DEFAULT_MAXFPS, getDefaultPeakRefreshRate());
         int index = mListPreference.findIndexOfValue(
                 String.format(Locale.US, "%.02f", currentValue));
         if (index < 0) index = 0;
@@ -126,7 +126,7 @@ public class PeakRefreshRateListPreferenceController extends BasePreferenceContr
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
-        Settings.System.putFloat(mContext.getContentResolver(), Settings.System.PEAK_REFRESH_RATE,
+        Settings.System.putFloat(mContext.getContentResolver(), Settings.System.BAIKALOS_DEFAULT_MAXFPS,
                 Float.valueOf((String) newValue));
         updateState(preference);
         return true;
