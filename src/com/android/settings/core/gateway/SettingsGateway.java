@@ -222,6 +222,8 @@ import com.android.settings.wifi.tether.WifiTetherSettings;
 import com.crdroid.settings.crDroidSettingsLayout;
 import com.crdroid.settings.fragments.ui.SmartPixels;
 
+import ru.baikalos.settings.BaikalSettingsLayout;
+
 public class SettingsGateway {
 
     /**
@@ -429,6 +431,7 @@ public class SettingsGateway {
             ToggleScreenMagnificationPreferenceFragment.class.getName(),
             FlashNotificationsPreferenceFragment.class.getName(),
             crDroidSettingsLayout.class.getName(),
+            BaikalSettingsLayout.class.getName(),
             RunningServices.class.getName(),
             SmartPixels.class.getName(),
     };
@@ -478,6 +481,7 @@ public class SettingsGateway {
             Settings.MemtagPageActivity.class.getName(),
             Settings.NavigationModeSettingsActivity.class.getName(),
             Settings.crDroidSettingsLayoutActivity.class.getName(),
+            Settings.BaikalSettingsLayoutActivity.class.getName(),
             Settings.DevRunningServicesActivity.class.getName(),
             Settings.SmartPixelsActivity.class.getName(),
     };

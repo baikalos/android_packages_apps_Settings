@@ -37,7 +37,7 @@ public class SimpleBuildNumberPreferenceController extends BasePreferenceControl
 
     @Override
     public CharSequence getSummary() {
-        String display = Build.DISPLAY.replace("lineage_", "crdroid_");
+        String display = Build.DISPLAY.replace("lineage_", "baikalos_");
         return BidiFormatter.getInstance().unicodeWrap(display);
     }
 }

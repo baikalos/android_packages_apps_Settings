@@ -200,10 +200,19 @@
         android:fragment="com.crdroid.settings.crDroidSettingsLayout"
         android:icon="@drawable/ic_settings_cogs"
         android:key="top_level_crdroid"
-        android:order="9"
+        android:order="5"
         android:title="@string/crdroid_settings_title"
         android:summary="@string/crdroid_settings_summary"
         settings:controller="com.crdroid.settings.TopLevelSettingsPreferenceController"/>
+
+    <com.android.settings.widget.HomepagePreference
+        android:fragment="ru.baikalos.settings.BaikalSettingsLayout"
+        android:icon="@drawable/ic_settings_cogs"
+        android:key="top_level_baikalos"
+        android:order="8"
+        android:title="@string/baikalos_settings_title"
+        android:summary="@string/baikalos_settings_summary"
+        settings:controller="ru.baikalos.settings.TopLevelSettingsPreferenceController"/>
 
     <com.android.settings.widget.HomepagePreference
         android:fragment="com.android.settings.system.SystemDashboardFragment"

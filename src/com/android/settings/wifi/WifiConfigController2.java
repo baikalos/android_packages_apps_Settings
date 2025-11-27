@@ -1079,7 +1079,7 @@ public class WifiConfigController2 implements TextWatcher,
             loadCertificates(
                     mEapCaCertSpinner,
                     mAndroidKeystoreAliasLoader.getCaCertAliases(),
-                    null /* noCertificateString */,
+                    mDoNotProvideEapUserCertString /* noCertificateString */,
                     false /* showMultipleCerts */,
                     true /* showUsePreinstalledCertOption */);
             loadCertificates(

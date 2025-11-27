@@ -254,6 +254,16 @@
             android:title="@string/crdroid_settings_title"
             android:summary="@string/crdroid_settings_summary"
             settings:controller="com.crdroid.settings.TopLevelSettingsPreferenceController"/>
+
+        <com.android.settings.widget.HomepagePreference
+            android:fragment="ru.baikalos.settings.BaikalSettingsLayout"
+            android:icon="@drawable/ic_settings_cogs_filled"
+            android:key="top_level_baikalos"
+            android:order="-40"
+            android:title="@string/baikalos_settings_title"
+            android:summary="@string/baikalos_settings_summary"
+            settings:controller="ru.baikalos.settings.TopLevelSettingsPreferenceController"/>
+
     </PreferenceCategory>
 
     <PreferenceCategory
