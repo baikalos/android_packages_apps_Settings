@@ -28,7 +28,7 @@ import com.android.settings.core.BasePreferenceController;
 
 public class LineageLicensePreferenceController extends BasePreferenceController {
 
-    private static final String PROPERTY_LINEAGE_LICENSE_URL = "ro.crdroidlegal.url";
+    private static final String PROPERTY_LINEAGE_LICENSE_URL = "https://crdroid.net/legal.php";
 
     public LineageLicensePreferenceController(Context context, String key) {
         super(context, key);

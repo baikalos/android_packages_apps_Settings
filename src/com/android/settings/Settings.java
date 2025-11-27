@@ -586,6 +586,7 @@ public class Settings extends SettingsActivity {
     public static class NotificationBundlesActivity extends SettingsActivity { /* empty */ }
 
     public static class crDroidSettingsLayoutActivity extends SettingsActivity {}
+    public static class BaikalSettingsLayoutActivity extends SettingsActivity {}
 
     public static class DevRunningServicesActivity extends SettingsActivity { /* empty */ }
 

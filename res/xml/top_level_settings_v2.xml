@@ -23,7 +23,7 @@
     <PreferenceCategory
         android:order="-140"
         android:key="top_level_account_category"
-        android:layout="@layout/settingslib_untitled_preference_category">
+        android:layout="@layout/settingslib_expressive_untitled_preference_category">
     </PreferenceCategory>
 
     <PreferenceCategory
@@ -52,9 +52,18 @@
     </PreferenceCategory>
 
     <PreferenceCategory
-        android:order="-120"
-        android:key="top_level_personalize_category"
+        android:order="-125"
+        android:key="top_level_custom_category"
         android:layout="@layout/settingslib_expressive_untitled_preference_category">
+
+        <com.android.settings.widget.HomepagePreference
+            android:fragment="ru.baikalos.settings.BaikalSettingsLayout"
+            android:icon="@drawable/ic_settings_cogs_filled"
+            android:key="top_level_baikalos"
+            android:order="-100"
+            android:title="@string/baikalos_settings_title"
+            android:summary="@string/baikalos_settings_summary"
+            settings:controller="ru.baikalos.settings.TopLevelSettingsPreferenceController"/>
 
         <com.android.settings.widget.HomepagePreference
             android:fragment="com.crdroid.settings.crDroidSettingsLayout"
@@ -64,6 +73,13 @@
             android:title="@string/crdroid_settings_title"
             android:summary="@string/crdroid_settings_summary"
             settings:controller="com.crdroid.settings.TopLevelSettingsPreferenceController"/>
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:order="-120"
+        android:key="top_level_personalize_category"
+        android:layout="@layout/settingslib_expressive_untitled_preference_category">
 
         <com.android.settings.widget.HomepagePreference
             android:fragment="com.android.settings.applications.AppDashboardFragment"
@@ -255,6 +271,7 @@
             settings:isPreferenceVisible="@bool/config_show_emergency_settings"
             settings:highlightableMenuKey="@string/menu_key_emergency"/>
     </PreferenceCategory>
+
 
     <PreferenceCategory
         android:order="100"
