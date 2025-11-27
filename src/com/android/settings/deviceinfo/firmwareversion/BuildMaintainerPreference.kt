@@ -138,7 +138,7 @@ class BuildMaintainerPreference :
 
     private fun getCodenameCandidates(): Set<String> {
         val result = LinkedHashSet<String>()
-        addIfNotEmpty(result, SystemProperties.get("ro.crdroid.device", null))
+        addIfNotEmpty(result, SystemProperties.get("ro.baikalos.device", null))
         addIfNotEmpty(result, SystemProperties.get("ro.product.device", null))
         addIfNotEmpty(result, SystemProperties.get("ro.product.vendor.device", null))
         addIfNotEmpty(result, SystemProperties.get("ro.build.product", null))
@@ -233,7 +233,7 @@ class BuildMaintainerPreference :
     companion object {
         private const val TAG = "BuildMaintainerPreference"
         private const val OTA_JSON_URL =
-            "https://raw.githubusercontent.com/crdroidandroid/" +
-                "android_vendor_crDroidOTA/refs/heads/17.0/%s.json"
+            "https://raw.githubusercontent.com/baikalos/" +
+                "android_vendor_BaikalOTA/refs/heads/17.0/%s.json"
     }
 }
