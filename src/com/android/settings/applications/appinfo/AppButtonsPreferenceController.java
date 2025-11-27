@@ -520,16 +520,18 @@ public class AppButtonsPreferenceController extends BasePreferenceController imp
 
     @VisibleForTesting
     void updateForceStopButton() {
-        if (mDpm.packageHasActiveAdmins(mPackageInfo.packageName)) {
+        Log.i(TAG, "updateForceStopButton: " + mAppEntry.info.packageName);
+
+        /*if (mDpm.packageHasActiveAdmins(mPackageInfo.packageName)) {
             // User can't force stop device admin.
             Log.w(TAG, "User can't force stop device admin");
-            updateForceStopButtonInner(false /* enabled */);
+            updateForceStopButtonInner(false / * enabled * /);
         } else if ((mAppEntry.info.flags & ApplicationInfo.FLAG_STOPPED) == 0) {
             // If the app isn't explicitly stopped, then always show the
             // force stop button.
             Log.w(TAG, "App is not explicitly stopped");
-            updateForceStopButtonInner(true /* enabled */);
-        } else {
+            // updateForceStopButtonInner(true / * enabled * /);
+        } else { */
             Intent intent = new Intent(Intent.ACTION_QUERY_PACKAGE_RESTART,
                     Uri.fromParts("package", mAppEntry.info.packageName, null));
             intent.setPackage("android");
@@ -541,14 +543,16 @@ public class AppButtonsPreferenceController extends BasePreferenceController imp
             mActivity.sendOrderedBroadcastAsUser(intent, UserHandle.CURRENT,
                     android.Manifest.permission.HANDLE_QUERY_PACKAGE_RESTART,
                     mCheckKillProcessesReceiver, null, Activity.RESULT_CANCELED, null, null);
-        }
+        /*}*/
     }
 
     @VisibleForTesting
     void updateForceStopButtonInner(boolean enabled) {
         if (mAppsControlDisallowedBySystem) {
+            Log.i(TAG, "updateForceStopButtonInner: (1) " + mAppEntry.info.packageName, new Throwable());
             mButtonsPref.setButton3Enabled(false);
         } else {
+            Log.i(TAG, "updateForceStopButtonInner: (2) " + mAppEntry.info.packageName + "," + enabled, new Throwable());
             mButtonsPref.setButton3Enabled(enabled);
         }
     }

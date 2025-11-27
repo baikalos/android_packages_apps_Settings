@@ -41,6 +41,7 @@ import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.BlendMode;
+import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 import android.multiuser.Flags;
@@ -1854,6 +1855,40 @@ public class UserSettings extends SettingsPreferenceFragment
         return R.string.help_url_users;
     }
 
+
+    /**
+     * Resizes a bitmap to ensure it fits into the Binder buffer.
+     * 1MB is the global limit, but we should stay well below that for icons.
+     */
+    private static Bitmap createScaledUserIcon(Resources resources,Bitmap bitmap) {
+        if (bitmap == null) {
+            return null;
+        }
+
+        int size = resources.getDimensionPixelSize(
+            com.android.internal.R.dimen.user_icon_size);
+
+        // Always create a new software-backed bitmap.
+        // This is safer than createScaledBitmap because it guarantees a fresh 
+        // memory allocation that is not Hardware-accelerated or Immutable.
+        Bitmap out = Bitmap.createBitmap(size, size, Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(out);
+    
+        // Draw the source bitmap into the new one with filtering for quality
+        android.graphics.Paint paint = new android.graphics.Paint();
+        paint.setFilterBitmap(true);
+        paint.setAntiAlias(true);
+    
+        android.graphics.Rect src = new android.graphics.Rect(0, 0, bitmap.getWidth(), bitmap.getHeight());
+        android.graphics.Rect dst = new android.graphics.Rect(0, 0, size, size);
+    
+        // This forced redraw cleans up the bitmap's native state before it hits the Parcel
+        canvas.drawBitmap(bitmap, src, dst, paint);
+    
+        return out;
+    }
+
+
     /**
      * Returns a default user icon (as a {@link Bitmap}) for the given user.
      *
@@ -1872,7 +1907,8 @@ public class UserSettings extends SettingsPreferenceFragment
             // Save it to cache
             sDarkDefaultUserBitmapCache.put(userId, bitmap);
         }
-        return bitmap;
+
+        return createScaledUserIcon(resources, bitmap);
     }
 
     /**
@@ -1889,7 +1925,12 @@ public class UserSettings extends SettingsPreferenceFragment
         }
         UserManager um = (UserManager) context.getSystemService(Context.USER_SERVICE);
         Bitmap bitmap = getDefaultUserIconAsBitmap(context.getResources(), userId);
-        um.setUserIcon(userId, bitmap);
+        try {
+            um.setUserIcon(userId, bitmap);
+        } catch(Exception e) {
+            Log.e(TAG, "Could not create user default photo", e);
+            return false;
+        }
 
         return true;
     }
