@@ -60,6 +60,8 @@ android_library {
         "src/**/*.kt",
         "crDroidSettings/src/**/*.java",
         "crDroidSettings/src/**/*.kt",
+        "BaikalSettings/src/**/*.java",
+        "BaikalSettings/src/**/*.kt",
     ],
     exclude_srcs: [
         "src/com/android/settings/biometrics/fingerprint2/lib/**/*.kt",
@@ -67,13 +69,14 @@ android_library {
     javac_shard_size: 50,
     use_resource_processor: true,
 
-    aaptflags: ["--extra-packages com.crdroid.settings"],
+    aaptflags: ["--extra-packages com.crdroid.settings,ru.baikalos.settings"],
 
     resource_dirs: [
         "res",
         "res-export", // for external usage
         "res-product",
         "crDroidSettings/res",
+        "BaikalSettings/res",
     ],
 
     optional_uses_libs: ["com.android.extensions.appfunctions"],
