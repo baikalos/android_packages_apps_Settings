@@ -72,6 +72,7 @@ import com.android.settings.development.bluetooth.BluetoothChannelModeDialogPref
 import com.android.settings.development.bluetooth.BluetoothCodecListPreferenceController;
 import com.android.settings.development.bluetooth.BluetoothHDAudioPreferenceController;
 import com.android.settings.development.bluetooth.BluetoothQualityDialogPreferenceController;
+import com.android.settings.development.bluetooth.BluetoothSBCHDDialogPreferenceController;
 import com.android.settings.development.bluetooth.BluetoothSampleRateDialogPreferenceController;
 import com.android.settings.development.bluetooth.BluetoothStackLogPreferenceController;
 import com.android.settings.development.desktopexperience.DesktopExperiencePreferenceController;
@@ -833,6 +834,8 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         controllers.add(new BluetoothSampleRateDialogPreferenceController(context, lifecycle,
                 bluetoothA2dpConfigStore));
         controllers.add(new BluetoothBitPerSampleDialogPreferenceController(context, lifecycle,
+                bluetoothA2dpConfigStore));
+        controllers.add(new BluetoothSBCHDDialogPreferenceController(context, lifecycle,
                 bluetoothA2dpConfigStore));
         controllers.add(new BluetoothQualityDialogPreferenceController(context, lifecycle,
                 bluetoothA2dpConfigStore));

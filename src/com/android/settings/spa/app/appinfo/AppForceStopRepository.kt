@@ -59,16 +59,17 @@ class AppForceStopRepository(
     /**
      * Gets whether a package can be force stopped.
      */
-    private suspend fun canForceStop(app: ApplicationInfo): Boolean = when {
+    private suspend fun canForceStop(app: ApplicationInfo): Boolean /*= when*/ {
         // User can't force stop device admin.
-        app.isActiveAdmin(context) -> false
+        // app.isActiveAdmin(context) -> false
 
-        appButtonRepository.isDisallowControl(app) -> false
+        // appButtonRepository.isDisallowControl(app) -> false
 
         // If the app isn't explicitly stopped, then always show the force stop button.
-        !app.hasFlag(ApplicationInfo.FLAG_STOPPED) -> true
+        // !app.hasFlag(ApplicationInfo.FLAG_STOPPED) -> true
 
-        else -> queryAppRestart(app)
+        // else -> 
+        return queryAppRestart(app)
     }
 
     /**
@@ -92,7 +93,7 @@ class AppForceStopRepository(
             val receiver: BroadcastReceiver = object : BroadcastReceiver() {
                 override fun onReceive(context: Context, intent: Intent) {
                     val enabled = resultCode != Activity.RESULT_CANCELED
-                    Log.d(TAG, "Got broadcast response: Restart status for $packageName $enabled")
+                    Log.d(TAG, "Got broadcast response: Restart status for $packageName $enabled ($resultCode)")
                     continuation.resume(enabled)
                 }
             }
